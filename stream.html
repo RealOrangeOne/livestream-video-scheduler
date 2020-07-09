@@ -502,6 +502,10 @@ state.run_post_match=function()
 {
     console.log("match end")
     state.match_end();
+
+    // Added behaviour to hide video player
+    showPlayer(false);
+
     setTimeout(function() {
         console.log("match end+10")
         state.match_end_plus_10();
