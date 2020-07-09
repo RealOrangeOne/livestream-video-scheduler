@@ -1,6 +1,8 @@
-# SRComp Livestream Overlay
+# SRComp Livestream Video Scheduler
 
-A HTML and JavaScript overlay for the livestream of the competition.
+A HTML and JavaScript video scheduler for the livestream of the competition.
+
+Piggybacks off the events created as part of https://github.com/srobo/livestream-overlay to run video of matches in-sync with sr-comp.
 
 ## Usage
 

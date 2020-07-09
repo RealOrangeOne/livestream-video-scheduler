@@ -1,3 +1,4 @@
+<!-- Adapted from https://github.com/srobo/livestream-overlay -->
 <html>
 
 <head>
@@ -5,31 +6,54 @@
     <meta charset="UTF-8"/>
     <title>srcomp-livestream-overlay</title>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css">-->
     <script src="node_modules/moment/min/moment.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="settings.js"></script>
 
     <script src="comp.js"></script>
     <script src="events.js"></script>
+    <script src="player-control.js" defer></script>
 
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+    <style>
+        #background{
+          width: 1920px;
+          height: 1080px;
+          position: relative;
+        }
+        #match-player{
+          width: 1920px;
+          height: 1080px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      </style>
 </head>
+
+
 
 <body>
 
+
+        <img id="background" src="genericbg.png">
+      
+        <video id="match-player" width="1920" height="1080" autoplay></video>
+
 <!-- Top match info -->
-<div id="overlay-top">
+<!-- <div id="overlay-top">
     <div id="overlay-top-content" class="sbox-small flair hidden">
         <div class="content">
             <p><span class="match-id">Match ??</span> <span class="match-type">(??)</span></p>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- Bottom ticker and zones -->
-<div id="overlay-bottom">
+<!-- <div id="overlay-bottom">
     <div id="overlay-content">
         <div id="sourcebots-logo">
             <img src="logo.png">
@@ -57,11 +81,11 @@
             </ul>
         </div>
     </div>
-</div>
+</div>-->
 
 
 <!-- Side bar scores -->
-<div id="overlay-side">
+<!-- <div id="overlay-side">
     <div id="overlay-side-scores" class="hidden">
         <div class="sbox-med flair">
             <div class="content"><h2>League scores</h2></div>
@@ -120,7 +144,7 @@
             <div class="name"><h2 style="">RPF</h2></div>
         </div>
     </div>
-</div>
+</div>-->
 
 <script>
 
@@ -151,12 +175,12 @@ overlay.progressCounter={
 
     show: function()
     {
-        $("#overlay-top-content").removeClass("hidden");
+        //$("#overlay-top-content").removeClass("hidden");
     },
 
     hide: function()
     {
-        $("#overlay-top-content").addClass("hidden");
+        //$("#overlay-top-content").addClass("hidden");
     },
 
     matchesTotal:0,
@@ -165,13 +189,13 @@ overlay.progressCounter={
     {
         if(match.type=="league")
         {
-            $("#overlay-top-content .content").html(
+            /*$("#overlay-top-content .content").html(
                 `<p><span class="match-id">${match.display_name}</span> <span class="match-type">(league)</span></p>`
-            );
+            );*/
         }
         else
         {
-            $("#overlay-top-content .content").html(`<p>${match.display_name.replace(/ \(.*\)/g,'')}</p>`);
+            //$("#overlay-top-content .content").html(`<p>${match.display_name.replace(/ \(.*\)/g,'')}</p>`);
         }
     },
 }
@@ -180,12 +204,12 @@ overlay.scores={
 
     show: function()
     {
-        $("#overlay-side-scores").removeClass("hidden");
+        //$("#overlay-side-scores").removeClass("hidden");
     },
 
     hide: function()
     {
-        $("#overlay-side-scores").addClass("hidden");
+        //$("#overlay-side-scores").addClass("hidden");
     },
 
     updateScores: function(teams)
@@ -205,7 +229,7 @@ overlay.scores={
 
         teamlist.sort(comparescore)
 
-        scoreout=$("#overlay-side-scores .table");
+        /*scoreout=$("#overlay-side-scores .table");
         for (i = 0; i<scoreout.find(".row").length; i++)
         {
             let span1=scoreout.find(".row:nth-child("+(i+1)+") span:nth-child(2)")
@@ -213,7 +237,7 @@ overlay.scores={
 
             span1.html(teamlist[i].tla);
             span2.html(teamlist[i].scores.league);
-        }
+        }*/
     }
 }
 
@@ -221,12 +245,12 @@ overlay.next={
 
     show: function()
     {
-        $("#overlay-side-upnext").removeClass("hidden");
+        //$("#overlay-side-upnext").removeClass("hidden");
     },
 
     hide: function()
     {
-        $("#overlay-side-upnext").addClass("hidden");
+        //$("#overlay-side-upnext").addClass("hidden");
     },
 
     setTeams: function(match)
@@ -238,8 +262,8 @@ overlay.next={
             let TLA = teamTLAs[cornerID]
             if(TLA==null || TLA=="???")
             {
-                $(".team-next.zone_"+cornerID+" h2").text("-EMPTY-");
-                $(".team-next.zone_"+cornerID+" img").attr("src","");
+                //$(".team-next.zone_"+cornerID+" h2").text("-EMPTY-");
+                //$(".team-next.zone_"+cornerID+" img").attr("src","");
             }
             else
             {
@@ -250,8 +274,8 @@ overlay.next={
                 else
                     teamImg = ""
                 let teamImage = teams[TLA]
-                $(".team-next.zone_"+cornerID+" h2").text(TLA);
-                $(".team-next.zone_"+cornerID+" img").attr("src",teamImg);
+                //$(".team-next.zone_"+cornerID+" h2").text(TLA);
+                //$(".team-next.zone_"+cornerID+" img").attr("src",teamImg);
             }
         }
     }
@@ -261,14 +285,14 @@ overlay.zones = {
 
     show: function()
     {
-        $("#zones").removeClass("hidden");
-        $("#match-counter").removeClass("only");
+        //$("#zones").removeClass("hidden");
+        //$("#match-counter").removeClass("only");
     },
 
     hide: function()
     {
-        $("#zones").addClass("hidden");
-        $("#match-counter").addClass("only");
+        //$("#zones").addClass("hidden");
+        //$("#match-counter").addClass("only");
     },
 
     //sets the team display for a given match
@@ -281,12 +305,12 @@ overlay.zones = {
             let TLA = teamTLAs[cornerID]
             if(TLA==null || TLA=="???")
             {
-                $("#zones .zone_"+cornerID+" p").text("-EMPTY-");
+                //$("#zones .zone_"+cornerID+" p").text("-EMPTY-");
             }
             else
             {
                 let teamName = teams[TLA].name
-                $("#zones .zone_"+cornerID+" p").text(TLA+": "+teamName);
+                //$("#zones .zone_"+cornerID+" p").text(TLA+": "+teamName);
             }
         }
     }
@@ -296,35 +320,35 @@ overlay.matchCounter={
 
     hide: function()
     {
-        $("#match-counter").width(0);
+        //$("#match-counter").width(0);
     },
 
     set_mode: function(mode)
     {
         switch(mode) {
             case "pre":
-                $("#match-counter").removeClass("clock-only");
-                $("#match-counter .clock-info").html("Matches begin at:");
+                //$("#match-counter").removeClass("clock-only");
+                //$("#match-counter .clock-info").html("Matches begin at:");
                 this.fixedClock=true;
                 break;
             case "gap":
-                $("#match-counter").removeClass("clock-only");
-                $("#match-counter .clock-info").html("Next Match:")
+                //$("#match-counter").removeClass("clock-only");
+                //$("#match-counter .clock-info").html("Next Match:")
                 this.fixedClock=false;
                 break;
             case "match":
-                $("#match-counter").addClass("clock-only");
-                $("#match-counter .clock-info").html("")
+                //$("#match-counter").addClass("clock-only");
+                //$("#match-counter .clock-info").html("")
                 this.fixedClock=false;
                 break;
             case "interval":
-                $("#match-counter").removeClass("clock-only");
-                $("#match-counter .clock-info").html("Matches resume at:")
+                //$("#match-counter").removeClass("clock-only");
+                //$("#match-counter .clock-info").html("Matches resume at:")
                 this.fixedClock=true;
                 break;
 
         }
-        $("#match-counter").width(($(".timer h2")[0].clientWidth)-10);
+        //$("#match-counter").width(($(".timer h2")[0].clientWidth)-10);
     },
 
     setNextMatch: function(match) {
@@ -419,7 +443,7 @@ overlay.matchCounter={
             hours = hours < 10 ? "0" + hours : hours;
             minutes = minutes < 10 ? "0" + minutes : minutes;
 
-            $("#match-counter .timer .clock").text(hours + ":" + minutes)
+            //$("#match-counter .timer .clock").text(hours + ":" + minutes)
         }
         else
         {
@@ -429,7 +453,7 @@ overlay.matchCounter={
             seconds = parseInt((timeDelta/1000)%60,10);
 
             seconds = seconds < 10 ? "0" + seconds : seconds;
-            $("#match-counter .timer .clock").text(minutes + ":" + seconds);
+            //$("#match-counter .timer .clock").text(minutes + ":" + seconds);
         }
     }
 }
@@ -467,6 +491,10 @@ state.run_pre_match=function()
     setTimeout(function() {
         console.log("match start")
         state.match_start();
+
+        // Added behaviour for video playback
+        playMatch(state.currentMatch.num);
+
     },1000*(30)); //run start script
 }
 
