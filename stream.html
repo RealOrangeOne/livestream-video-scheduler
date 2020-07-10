@@ -503,12 +503,16 @@ state.run_post_match=function()
     console.log("match end")
     state.match_end();
 
-    // Added behaviour to hide video player
-    showPlayer(false);
+    // Added behaviour to pause the match at the end
+    pauseVideo();
 
     setTimeout(function() {
         console.log("match end+10")
         state.match_end_plus_10();
+
+        // Added behaviour to hide video player
+        showPlayer(false);
+
     },1000*(10)); //run 10s script
 }
 

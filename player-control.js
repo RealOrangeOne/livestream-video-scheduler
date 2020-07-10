@@ -22,6 +22,10 @@ function playVideo(vidSrc, bgImg = STANDARD_BG) {
   video.play();
 }
 
+function pauseVideo(vidSrc, bgImg = STANDARD_BG) {
+    video.pause();
+}
+
 function showPlayer(show){
     if(show){
         video.style.setProperty("visibility", "visible", "important");
@@ -32,7 +36,9 @@ function showPlayer(show){
 }
 
 function playMatch(matchNum){
-    playVideo(getMatchFile(matchNum));
+    console.log("Playing",matchNum);
+    //playVideo(getMatchFile(matchNum));
+    playVideo(getMatchFile(0));
 }
 
 function getMatchFile(matchNum){
