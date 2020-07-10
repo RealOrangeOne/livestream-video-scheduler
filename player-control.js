@@ -36,9 +36,9 @@ function showPlayer(show){
 }
 
 function playMatch(matchNum){
-    console.log("Playing",matchNum);
-    //playVideo(getMatchFile(matchNum));
-    playVideo(getMatchFile(0));
+    console.log("Playing match",matchNum);
+    playVideo(getMatchFile(matchNum));
+    //playVideo(getMatchFile(0));
 }
 
 function getMatchFile(matchNum){

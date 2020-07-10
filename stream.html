@@ -267,6 +267,7 @@ overlay.next={
             }
             else
             {
+                console.log("Setting team on overlay");
                 let teamName = teams[TLA].name
                 let teamImg;
                 if ("image_url" in teams[TLA])
@@ -285,6 +286,7 @@ overlay.zones = {
 
     show: function()
     {
+        console.log("Showing zones on overlay");
         //$("#zones").removeClass("hidden");
         //$("#match-counter").removeClass("only");
     },
@@ -339,7 +341,32 @@ overlay.matchCounter={
             case "match":
                 //$("#match-counter").addClass("clock-only");
                 //$("#match-counter .clock-info").html("")
+                console.log("This is a match");
                 this.fixedClock=false;
+
+
+                // =============================================================
+                // Added behaviour for video playback
+                playMatch(state.currentMatch.num);
+
+                setTimeout(function() {
+                    console.log("match start+180")
+                    // Added behaviour to pause video player
+                    pauseVideo();
+
+                },1000*(180)); //run 180s script
+
+                setTimeout(function() {
+                    console.log("match start+200")
+                    // Added behaviour to hide video player
+                    showPlayer(false);
+
+                },1000*(200)); //run 200s script
+                // =============================================================
+                // TODO: Keep this in state.run_pre_match and state.run_post_match
+
+
+
                 break;
             case "interval":
                 //$("#match-counter").removeClass("clock-only");
@@ -493,7 +520,8 @@ state.run_pre_match=function()
         state.match_start();
 
         // Added behaviour for video playback
-        playMatch(state.currentMatch.num);
+        // playMatch(state.currentMatch.num);
+        // TODO: Re-enable this in favour of the version in overlay.matchCounter.set_mode
 
     },1000*(30)); //run start script
 }
@@ -504,14 +532,16 @@ state.run_post_match=function()
     state.match_end();
 
     // Added behaviour to pause the match at the end
-    pauseVideo();
+    // pauseVideo();
+    // TODO: Re-enable this in favour of the version in overlay.matchCounter.set_mode
 
     setTimeout(function() {
         console.log("match end+10")
         state.match_end_plus_10();
 
         // Added behaviour to hide video player
-        showPlayer(false);
+        //showPlayer(false);
+        // TODO: Re-enable this in favour of the version in overlay.matchCounter.set_mode
 
     },1000*(10)); //run 10s script
 }
