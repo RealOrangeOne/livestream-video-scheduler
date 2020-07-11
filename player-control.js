@@ -52,5 +52,3 @@ setTimeout(function() {
         setBg(STANDARD_BG);
     },1000);
 },1000);
-
-playMatch(1)
