@@ -1,7 +1,7 @@
 var SRC_ATTR = 'src';
 var STANDARD_BG = 'genericbg.png';
 var MATCH_DIR = "./match_videos/";
-var MATCH_FILE_FORMAT = ".mkv";
+var MATCH_FILE_FORMAT = ".mp4";
 
 
 var video = document.getElementById('match-player');
@@ -45,3 +45,12 @@ function getMatchFile(matchNum){
     return MATCH_DIR.concat(matchNum).concat(MATCH_FILE_FORMAT);
 }
 
+setTimeout(function() {
+    setBg("loading.png");
+
+    setTimeout(function() {
+        setBg(STANDARD_BG);
+    },1000);
+},1000);
+
+playMatch(1)
