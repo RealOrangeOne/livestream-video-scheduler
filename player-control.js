@@ -1,6 +1,6 @@
 var SRC_ATTR = 'src';
 var STANDARD_BG = 'genericbg.png';
-var MATCH_DIR = "./match_videos/";
+var MATCH_DIR = "./match_videos/match-";
 var MATCH_FILE_FORMAT = ".mp4";
 
 
