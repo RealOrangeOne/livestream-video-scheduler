@@ -16,4 +16,4 @@ Edit the `settings.js` with the appropriate `srcomp` settings.
 
 Use chroma-key with your streaming software.
 
-Place videos of matches in `/match_videos/` with the title `[matchnum].mp4`. e.g. `5.mp4`.
+Place videos of matches in `/match_videos/` with the title `match-[matchnum].mp4`. e.g. `match-5.mp4`.
