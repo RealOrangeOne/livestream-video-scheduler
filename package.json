@@ -5,13 +5,15 @@
   "main": " ",
   "dependencies": {
     "jquery": "^3.5.1",
-    "moment": "^2.27.0"
+    "moment": "^2.27.0",
+    "serve": "^11.3.2"
   },
   "devDependencies": {
     "sass": "^1.32.5"
   },
   "scripts": {
-    "build": "sass style.scss style.css"
+    "build": "sass style.scss style.css",
+    "start": "serve"
   },
   "repository": {
     "type": "git",
